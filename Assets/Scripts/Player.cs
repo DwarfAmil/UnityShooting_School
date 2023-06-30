@@ -63,7 +63,7 @@ public class Player : MonoBehaviour
     {
         float distanceX = Input.GetAxis("Horizontal") * Time.deltaTime * moveSpeed;
         float distanceY = Input.GetAxis("Vertical") * Time.deltaTime * moveSpeed;
-        this.gameObject.transform.Translate(distanceX, 0, distanceY);
+        this.gameObject.transform.Translate(distanceX, distanceY, 0);
 
         skillCool01 -= Time.deltaTime;
 
@@ -98,17 +98,25 @@ public class Player : MonoBehaviour
 
         if (distanceX + distanceY != 0)
         { 
-            playerFuel -= 0.001f;
+            playerFuel -= 0.003f;
         }
 
-        if (this.transform.position.x < -15)
+        if (Input.GetKeyDown(KeyCode.W) && Input.GetKeyDown(KeyCode.A) ||
+            Input.GetKeyDown(KeyCode.LeftArrow) && Input.GetKeyDown(KeyCode.UpArrow) ||
+            Input.GetKeyDown(KeyCode.S) && Input.GetKeyDown(KeyCode.D) ||
+            Input.GetKeyDown(KeyCode.DownArrow) && Input.GetKeyDown(KeyCode.RightArrow))
         {
-            this.transform.position = new Vector3(-15, this.transform.position.y, this.transform.position.z);
+            playerFuel -= 0.003f;
         }
 
-        if (this.transform.position.x > 15)
+        if (this.transform.position.x < -34)
         {
-            this.transform.position = new Vector3(15, this.transform.position.y, this.transform.position.z);
+            this.transform.position = new Vector3(-34, this.transform.position.y, this.transform.position.z);
+        }
+
+        if (this.transform.position.x > 33)
+        {
+            this.transform.position = new Vector3(33, this.transform.position.y, this.transform.position.z);
         }
 
         if (this.transform.position.y < -19)
@@ -319,5 +327,10 @@ public class Player : MonoBehaviour
     public void Clear()
     {
         StartCoroutine("StageClear");
+    }
+
+    public void OnClickHome()
+    {
+        SceneManager.LoadScene("Title");
     }
 }

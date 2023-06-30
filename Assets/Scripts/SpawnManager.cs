@@ -37,7 +37,7 @@ public class SpawnManager : MonoBehaviour
 
     void SpawnObject()
     {
-        spawnPoint.position = new Vector3(Random.Range(-15, 16), 20, 0);
+        spawnPoint.position = new Vector3(Random.Range(-34, 33), 20, 0);
         Instantiate(meteo, spawnPoint.position, Quaternion.identity);
     }
 
@@ -51,7 +51,7 @@ public class SpawnManager : MonoBehaviour
 
     public void NextStage()
     {
-        GameObject.Find("player").GetComponent<Player>().enemyCount = 10;
+        GameObject.Find("player").GetComponent<Player>().enemyCount = 20;
         StartCoroutine("StageCtrl");
     }
 
